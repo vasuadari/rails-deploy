@@ -21,6 +21,6 @@
 - name: checkout git repo into release directory
   environment: env_variables
   git:
-    repo: {{ git_repository_path }}
+    repo: "{{ git_repository_path }}"
     dest: "{{ current_release_path.stdout }}"
     version: "{{ version }}"
