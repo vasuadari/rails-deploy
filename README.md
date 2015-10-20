@@ -13,6 +13,48 @@ Add hostnames inside inventory file under inventories path based on the environm
 
 ## Deployment configuration
 
+groups/all:
+
+```
+ssh_user: "{{ ssh_user }}"
+
+home_path: "{{ ansible_env.HOME }}"
+
+application_name: rails_app
+
+# Branch to deploy
+version: master
+
+# Base directory where application resides
+application_path: "{{ home_path }}/{{ application_name }}"
+
+# Path where shared directory resides
+shared_path: "{{ application_path }}/shared"
+
+# Path where all the releases directory resides
+releases_path: "{{ application_path }}/releases"
+
+# Current release path
+current_path: "{{ application_path }}/current"
+
+git_repository_path: ''
+
+# Environment variable to be set on the remote servers
+env_variables:
+  PATH: "{{ home_path }}/bin:/usr/bin:/bin"
+
+config_files:
+  - database.yml
+  - redis.yml
+  - secrets.yml
+  - solr.yml
+  - memcached.yml
+
+# Minimum no. of releases to maintain
+keep_releases: 5
+
+```
+
 Set common deployment configurations in group_vars/all file. Use other files under
 group_vars for environment specific configurations.
 
