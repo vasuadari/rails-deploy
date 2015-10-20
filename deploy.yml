@@ -1,0 +1,6 @@
+---
+- name: Main playbook to deploy the rails application
+  hosts: all
+  gather_facts: no
+
+- include: playbooks/app.yml

@@ -1,0 +1,4 @@
+# Use this option to switch to different user during deployment
+# switch_as: deploy
+env: it
+bundle_install_args: "--local --quiet --without development test profiling"

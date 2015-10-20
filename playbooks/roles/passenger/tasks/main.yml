@@ -1,0 +1,8 @@
+---
+# This task file contains tasks related to application server
+- name: restart passenger
+  file:
+    state: touch
+    owner: "{{ switch_as }}"
+    group: "{{ switch_as }}"
+    path: "{{ current_path }}/tmp/restart.txt"

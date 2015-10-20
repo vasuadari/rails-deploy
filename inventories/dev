@@ -1,0 +1,11 @@
+# Development environment
+
+[app_servers]
+# myapp-dev-1.example.com
+# myapp-dev-2.example.com
+# myapp-dev-3.example.com
+# OR
+# myapp-dev-[1-3].example.com
+
+[dev:children]
+app_servers

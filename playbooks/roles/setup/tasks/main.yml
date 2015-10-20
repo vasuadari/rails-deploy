@@ -1,0 +1,43 @@
+---
+# Creates directory structure inside shared dir
+- name: stat log directory
+  stat:
+    path: "{{ shared_path }}/log"
+  register: log
+
+- name: stat pids directory
+  stat:
+    path: "{{ shared_path }}/pids"
+  register: pids
+
+- name: stat system directory
+  stat:
+    path: "{{ shared_path }}/system"
+  register: system
+
+- name: create log directory
+  file:
+    state: directory
+    owner: "{{ switch_as }}"
+    group: "{{ switch_as }}"
+    recurse: yes
+    path: "{{ shared_path }}/log"
+  when: log.stat.exists == false
+
+- name: create pids directory
+  file:
+    state: directory
+    owner: "{{ switch_as }}"
+    group: "{{ switch_as }}"
+    recurse: yes
+    path: "{{ shared_path }}/pids"
+  when: pids.stat.exists == false
+
+- name: create system directory
+  file:
+    state: directory
+    owner: "{{ switch_as }}"
+    group: "{{ switch_as }}"
+    recurse: yes
+    path: "{{ shared_path }}/system"
+  when: system.stat.exists == false

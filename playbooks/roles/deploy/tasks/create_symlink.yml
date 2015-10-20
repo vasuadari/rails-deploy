@@ -1,0 +1,26 @@
+---
+# Creates required symlink for all the shared files or directories
+- name: link log directory
+  file:
+    state: link
+    path: "{{ current_release_path.stdout }}/log"
+    src: "{{ shared_path }}/log"
+
+- name: link pids directory
+  file:
+    state: link
+    path: "{{ current_release_path.stdout }}/tmp/pids"
+    src: "{{ shared_path }}/pids"
+
+- name: link system directory
+  file:
+    state: link
+    path: "{{ current_release_path.stdout }}/public/system"
+    src: "{{ shared_path }}/system"
+
+- name: create symlink for all the config files
+  file:
+    state: link
+    path: "{{ current_release_path.stdout }}/config/{{ item }}"
+    src: "{{ shared_path }}/config/{{ item }}"
+  with_items: config_files

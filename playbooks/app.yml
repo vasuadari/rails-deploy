@@ -1,0 +1,11 @@
+---
+- name: Playbook for app servers
+  hosts: app_servers
+  remote_user: "{{ ssh_user }}"
+  # Set these options to deploy as different user
+  # sudo: yes
+  # sudo_user: "{{ switch_as }}"
+  roles:
+    - deploy
+    - cleanup
+    - passenger

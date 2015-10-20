@@ -1,0 +1,6 @@
+---
+# Clean up old releases.By default, the last 5 releases are kept on each
+# server (though you can change this with the keep_releases variable).All
+# other deployed revisions are removed from the servers.
+- name: cleanup releases
+  shell: ls -1dt {{ releases_path }}/* | tail -n +{{ keep_releases + 1 }} | sort | xargs rm -rf

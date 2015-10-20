@@ -1,0 +1,26 @@
+---
+# Updates code on all the servers
+- name: get release timestamp
+  local_action: command date +%Y%m%d%H%M%S # Runs this command locally
+  register: timestamp
+  sudo: no
+  run_once: true
+
+- name: name release directory
+  command: echo "{{ application_path }}/releases/{{ timestamp.stdout }}"
+  register: current_release_path
+
+- name: create release directory
+  file:
+    state: directory
+    owner: "{{ switch_as }}"
+    group: "{{ switch_as }}"
+    recurse: yes
+    path: "{{ current_release_path.stdout }}"
+
+- name: checkout git repo into release directory
+  environment: env_variables
+  git:
+    repo: {{ git_repository_path }}
+    dest: "{{ current_release_path.stdout }}"
+    version: "{{ version }}"

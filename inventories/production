@@ -1,0 +1,11 @@
+# Production environment
+
+[app_servers]
+# myapp-1.example.com
+# myapp-2.example.com
+# myapp-3.example.com
+# OR
+# myapp-[1-3].example.com
+
+[production:children]
+app_servers

@@ -1,0 +1,30 @@
+---
+# This task file contains common tasks to deploy the application code to hosts
+- name: stat current directory
+  stat:
+    path: "{{ current_path }}"
+  register: current
+
+- name: get previous release
+  command: readlink {{ current_path }}
+  register: previous_release_path
+  when: current.stat.islnk is defined and current.stat.islnk
+
+- include: update_code.yml
+
+- include: ../../setup/tasks/main.yml
+
+- include: create_symlink.yml
+
+- name: bundle install
+  shell: cd {{ current_release_path.stdout }} && {{ home_path }}/bin/bundle install {{ bundle_install_args }}
+
+- name: link current directory
+  file:
+    state: link
+    path: "{{ current_path }}"
+    src: "{{ current_release_path.stdout }}"
+
+- name: create REVISION file
+  environment: env_variables
+  shell: cd {{ current_release_path.stdout }} && git log|head -1|cut -f 2 -d ' ' > REVISION

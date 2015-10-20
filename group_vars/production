@@ -1,0 +1,4 @@
+# Use this option to switch to different user during deployment
+# switch_as: deploy
+env: production
+bundle_install_args: "--deployment --path {{ shared_path }}/bundle --quiet --without development test profiling"

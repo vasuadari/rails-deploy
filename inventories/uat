@@ -1,0 +1,11 @@
+# UAT environment
+
+[app_servers]
+# myapp-uat-1.example.com
+# myapp-uat-2.example.com
+# myapp-uat-3.example.com
+# OR
+# myapp-uat-[1-3].example.com
+
+[uat:children]
+app_servers
