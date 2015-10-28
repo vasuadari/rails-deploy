@@ -60,6 +60,8 @@ group_vars for environment specific configurations.
 
 ## Starting deployment
 
+```
 ansible-playbook -i inventories/prod deploy.yml --extra-vars 'ssh_user=deploy'
+```
 
 **Note:** Use -K option to deploy other than ssh user.
